@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,12 +42,12 @@ public class Board {
 	@Lob//대용량 데이터
 	private String content;//섬머노트 라이브러리 사용.
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)//user는 하나뿐이니까 조인해서 바로준다.
 	@JoinColumn(name="userId")
 	private User user;//DB는 오브젝트를 저장할 수 없다. 하지만 자바는 오브젝트를 저장할 수 있다.
 	
-	
-	@OneToMany(mappedBy = "board")
+	//fetch=FetchType.LAZY는 필요할때 떙겨온다.
+	@OneToMany(mappedBy = "board", fetch=FetchType.EAGER)//mappedBy 연관관계의 주인이 아니다. DB의 컬럼을 만들지마세요.
 	private List<Reply> reply;
 	
 	@ColumnDefault("0")
