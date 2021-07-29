@@ -19,12 +19,14 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.yoon.blog.model.RoleType;
 import com.yoon.blog.model.User;
 import com.yoon.blog.repository.UserRepository;
 
 @RestController
 public class DummyControllerTest {
+	
 	/*
 	 @PostMapping("/dummy/join")
 	 public String join(String username, String password, String email) {

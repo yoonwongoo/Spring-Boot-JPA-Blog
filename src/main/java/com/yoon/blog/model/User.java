@@ -36,7 +36,7 @@ public class User {
 	private int id;//넘버링을 위해서 오라클기준 sequence, mysql기준 auto_increment
 	
 	
-	@Column(nullable = false, length=30)
+	@Column(nullable = false, length=30, unique=true)
 	private String username; //아이디
 	
 	@Column(nullable = false, length=100)//해쉬비밀번호를 하기 위해 널널히 설정.
@@ -45,7 +45,7 @@ public class User {
 	@Column(nullable = false, length=50)
 	private String email;//이메일
 	
-	//@ColumnDefault("'USER'")
+	//@ColumnDefault("'USER'")//default사용하지말고 그냥 넣어주자.
 	@Enumerated(EnumType.STRING)//db에는 타입이 RoleType이 없기때문에 String을 해준다.
 	private RoleType role; //enum을 사용해서하자..여기서는 일단 관리자 일반사용자의 구별.기본으로 일반사용자로 등록을해놓자.
 	
