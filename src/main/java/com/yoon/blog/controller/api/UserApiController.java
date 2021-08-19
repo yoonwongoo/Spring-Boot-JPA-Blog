@@ -1,5 +1,7 @@
 package com.yoon.blog.controller.api;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +28,22 @@ public class UserApiController {
 		
 		System.out.println("save함수");
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);//json오브젝트를 json으로 리턴해줌.
+	}
+	
+	@PostMapping("/api/user/login")
+	public ResponseDto<Integer> login(@RequestBody User user, HttpSession session){
+		
+		System.out.println("login함수호출");
+		User principal = userService.로그인(user);
+		
+		if(principal != null) {
+			session.setAttribute("principal", principal);//key,value
+			
+		}
+		
+		
+		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+		
 	}
 
 }
