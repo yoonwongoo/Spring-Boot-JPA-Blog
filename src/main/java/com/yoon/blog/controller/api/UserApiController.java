@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yoon.blog.dto.ResponseDto;
 import com.yoon.blog.model.RoleType;
 import com.yoon.blog.model.User;
-import com.yoon.blog.repository.UserRepository;
 import com.yoon.blog.service.UserService;
 
 @RestController//데이터전용
@@ -20,7 +19,7 @@ public class UserApiController {
 	@Autowired
 	private UserService userService;
 	 
-	@PostMapping("/api/user")
+	@PostMapping("/auth/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user) {//username password email 인데 role은 강제로 넣어주자.
 		
 		user.setRole(RoleType.USER);
@@ -30,20 +29,19 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);//json오브젝트를 json으로 리턴해줌.
 	}
 	
-	@PostMapping("/api/user/login")
-	public ResponseDto<Integer> login(@RequestBody User user, HttpSession session){
-		
-		System.out.println("login함수호출");
-		User principal = userService.로그인(user);
-		
-		if(principal != null) {
-			session.setAttribute("principal", principal);//key,value
-			
-		}
-		
-		
-		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
-		
-	}
+	/*
+	 * @PostMapping("/api/user/login") public ResponseDto<Integer>
+	 * login(@RequestBody User user, HttpSession session){
+	 * 
+	 * System.out.println("login함수호출"); User principal = userService.로그인(user);
+	 * 
+	 * if(principal != null) { session.setAttribute("principal",
+	 * principal);//key,value
+	 * 
+	 * }
+	 * return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
+	 * 
+	 * }
+	 */
 
 }

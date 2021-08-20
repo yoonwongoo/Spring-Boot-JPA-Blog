@@ -24,11 +24,15 @@ public class UserService {
 	}//이 전체가 성공을 하면 커밋 아님 롤백인데 아직 롤백은 구현안함.
 	
 	
-	@Transactional(readOnly = true)//셀렉할때 트랙잭션 시작, 서비스 종료시에 트랙잭션 종료 (정합성)
-	public User 로그인(User user) {
-		System.out.println(userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword()));
-	return	userRepository.findByUsernameAndPassword(user.getUsername(), user.getPassword());
-		
-	}
+	/*
+	 * @Transactional(readOnly = true)//셀렉할때 트랙잭션 시작, 서비스 종료시에 트랙잭션 종료 (정합성) public
+	 * User 로그인(User user) {
+	 * System.out.println(userRepository.findByUsernameAndPassword(user.getUsername(
+	 * ), user.getPassword())); return
+	 * userRepository.findByUsernameAndPassword(user.getUsername(),
+	 * user.getPassword());
+	 * 
+	 * }
+	 */
 	
 }
