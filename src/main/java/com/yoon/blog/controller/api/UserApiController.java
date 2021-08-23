@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,18 +19,18 @@ public class UserApiController {
 	
 	@Autowired
 	private UserService userService;
-	 
+	
+	
 	@PostMapping("/auth/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user) {//username password email 인데 role은 강제로 넣어주자.
 		
-		user.setRole(RoleType.USER);
-		userService.회원가입(user);
 		
+		userService.회원가입(user);
 		System.out.println("save함수");
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);//json오브젝트를 json으로 리턴해줌.
 	}
 	
-	/*
+	/* 로그인 메서드
 	 * @PostMapping("/api/user/login") public ResponseDto<Integer>
 	 * login(@RequestBody User user, HttpSession session){
 	 * 

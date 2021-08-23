@@ -39,7 +39,7 @@ public class User {
 	@Column(nullable = false, length=30, unique=true)
 	private String username; //아이디
 	
-	@Column(nullable = false, length=100)//해쉬비밀번호를 하기 위해 널널히 설정.
+	@Column(nullable = false, length=300)//해쉬비밀번호를 하기 위해 널널히 설정.
 	private String password;//비밀번호
 
 	@Column(nullable = false, length=50)
