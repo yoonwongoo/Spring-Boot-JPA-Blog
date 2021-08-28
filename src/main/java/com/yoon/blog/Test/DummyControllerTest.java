@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,14 +20,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.yoon.blog.model.Board;
 import com.yoon.blog.model.RoleType;
 import com.yoon.blog.model.User;
 import com.yoon.blog.repository.UserRepository;
+import com.yoon.blog.service.BoardService;
 
 @RestController
 public class DummyControllerTest {
 	
+	@Autowired
+	private BoardService boardService;
 	/*
 	 @PostMapping("/dummy/join")
 	 public String join(String username, String password, String email) {
@@ -132,15 +136,23 @@ public class DummyControllerTest {
 	
 	/*페이징을 이용한 유저 데이터를 받아옴.select*/
 	@GetMapping("/dummy/user")
-	public List<User> pageList(@PageableDefault(size=2,sort="id",direction = Sort.Direction.DESC)Pageable pageable){
+	public Page<User> pageList(@PageableDefault(size=2,sort="id",direction = Sort.Direction.DESC)Pageable pageable){
 	Page<User> PagingUser = userRepository.findAll(pageable);
 	
 	List<User> users = PagingUser.getContent();
 	//리스트로 리턴하자
 	
-	return 	users;
+	return 	PagingUser;
 	}
 	
 	
+	
+	@GetMapping("/dummy/board")
+	public Page index(Model model, @PageableDefault(size=3, sort="id",direction = Sort.Direction.DESC)Pageable pageable) {
+		
+		model.addAttribute("boards", boardService.글목록(pageable));
+		Page<Board> board = boardService.글목록(pageable);
+		return board;
+	}
 	
 }

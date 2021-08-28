@@ -9,7 +9,7 @@ let index = {
 		//alert('user의 함수가 호출됨');
 		let data = {
 			title: $("#title").val(),
-			content: $("#contnet").val()
+			content: $("#content").val()
 			
 		};
 		//console.log(data);
