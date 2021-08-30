@@ -1,16 +1,19 @@
 let index = {
 	init: function() {
-		$("#btn-save").on("click", () => {           //function(){}, ()=>{} this를 바인딩하기 위해서
+		$("#btn-save").on("click", () => {
 			this.save();
 		});
-		
+		$("#btn-delete").on("click", () => {
+			this.deleteById();//예약어여서 delete는 지양하자
+		});
+
 	},
-	save:function() { 
+	save: function() {
 		//alert('user의 함수가 호출됨');
 		let data = {
 			title: $("#title").val(),
 			content: $("#content").val()
-			
+
 		};
 		//console.log(data);
 		//ajax통신을 이용해서 3개의 파라미터 데이터를 제이슨으로 변경하여 insert요청
@@ -23,6 +26,25 @@ let index = {
 			dataType: "json"//요청을 서버로해서 응답이 왔을 때, 기본적인 모든것이 문자열.생긴게 json이면 js오브젝트로 변경해준다.
 		}).done(function(resp) {//컨트롤러의 리턴값.
 			alert("글쓰기 등록완료.");
+			location.href = "/";
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+	},
+
+	deleteById: function() {
+		
+		var id =$("#id").text();
+		
+		$.ajax({
+
+
+			type: "DELETE",
+			url: "/api/board/"+id,
+			contentType:"application/json;charset=utf-8",
+			dataType: "json"//요청을 서버로해서 응답이 왔을 때, 기본적인 모든것이 문자열.생긴게 json이면 js오브젝트로 변경해준다.
+		}).done(function(resp) {//컨트롤러의 리턴값.
+			alert("삭제완료");
 			location.href = "/";
 		}).fail(function(error) {
 			alert(JSON.stringify(error));

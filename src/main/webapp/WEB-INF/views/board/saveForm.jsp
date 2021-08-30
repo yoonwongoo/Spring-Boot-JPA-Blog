@@ -17,6 +17,7 @@
 
 	</form>
 	<button id="btn-save" class="btn btn-primary">글쓰기 완료</button>
+	<button class="btn btn-secondary" onclick="history.back()">돌아가기</button>
 </div>
 
 <script>
@@ -26,6 +27,6 @@
 	});
 </script>
 
-<script src ="/js/board.js"></script>
- 
+<script src="/js/board.js"></script>
+
 <%@ include file="../layout/footer.jsp"%>

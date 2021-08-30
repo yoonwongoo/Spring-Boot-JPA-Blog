@@ -1,6 +1,7 @@
 package com.yoon.blog.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -28,10 +29,26 @@ public class BoardService {
 	}
 	
 	
-	
+	@Transactional(readOnly = true)
 	public Page<Board> 글목록(Pageable pageable){
 		
 		return boardRepository.findAll(pageable);
+		
+	}
+	
+	@Transactional(readOnly = true)
+	public Board 글상세보기(int id) {
+		return boardRepository.findById(id)
+				.orElseThrow(()->{
+					return new IllegalArgumentException("글상세보기 실패");
+					
+				});
+	} 
+	
+	@Transactional
+	public void 글삭제(int id) {
+		
+		boardRepository.deleteById(id);
 		
 	}
 }
