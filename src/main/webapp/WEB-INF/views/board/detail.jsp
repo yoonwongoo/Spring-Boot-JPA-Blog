@@ -8,7 +8,7 @@
 	
 	<c:if test ="${board.user.id == principal.user.id}">
 	<button id="btn-delete"class="btn btn-danger">삭제</button>
-	<a  href="/board/{board.id}/updateForm" class="btn btn-warning">수정</a> 
+	<a  href="/board/${board.id}/updateForm" class="btn btn-warning">수정</a> 
 	</c:if>
 	
 	

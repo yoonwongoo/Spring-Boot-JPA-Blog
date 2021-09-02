@@ -3,8 +3,13 @@ let index = {
 		$("#btn-save").on("click", () => {
 			this.save();
 		});
+		
 		$("#btn-delete").on("click", () => {
 			this.deleteById();//예약어여서 delete는 지양하자
+		});
+		
+		$("#btn-update").on("click", () => {
+			this.update();
 		});
 
 	},
@@ -33,15 +38,15 @@ let index = {
 	},
 
 	deleteById: function() {
-		
-		var id =$("#id").text();
-		
+
+		let id = $("#id").text();
+
 		$.ajax({
 
 
 			type: "DELETE",
-			url: "/api/board/"+id,
-			contentType:"application/json;charset=utf-8",
+			url: "/api/board/" + id,
+			contentType: "application/json;charset=utf-8",
 			dataType: "json"//요청을 서버로해서 응답이 왔을 때, 기본적인 모든것이 문자열.생긴게 json이면 js오브젝트로 변경해준다.
 		}).done(function(resp) {//컨트롤러의 리턴값.
 			alert("삭제완료");
@@ -51,6 +56,30 @@ let index = {
 		});
 	},
 
+	update: function() {
+		
+		let id = $("#id").val();
+		
+		let data = {
+			title: $("#title").val(),
+			content: $("#content").val()
+			
+		};
+		
+
+		$.ajax({
+			type: "PUT",
+			url: "/api/board/" + id,
+			data: JSON.stringify(data),//이렇게 던지면 자바가 이해를 못해서 json을 변경 후 전송.
+			contentType: "application/json;charset=utf-8",//바디의 데이터타입이 무엇인지(MIME)
+			dataType: "json"//요청을 서버로해서 응답이 왔을 때, 기본적인 모든것이 문자열.생긴게 json이면 js오브젝트로 변경해준다.
+		}).done(function(resp) {//컨트롤러의 리턴값.
+			alert("글수정완료.");
+			location.href = "/";
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+	},
 
 }
 
