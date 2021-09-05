@@ -42,5 +42,18 @@ public class UserService {
 	 * 
 	 * }
 	 */
-	
+	@Transactional
+	public void 회원수정(User user) {
+		//수정시에는 영속성 컨텍스트를 User오브젝트를 영속화시키고 수정을하자.
+		//셀렉을 최초로 해주며 영속성컨텍스트에 남으며 그때부터 영속성컨텍스트를 이용하여서 수정하자 그럼 알아서 더티체킹들어간다.
+		User persistance = userRepository.findById(user.getId()).orElseThrow(()->{
+			return new IllegalArgumentException("회원찾기 실패");
+	});
+		
+		String rawPassword = user.getPassword();
+		String encPassword = encoder.encode(rawPassword);
+		persistance.setPassword(encPassword);
+		
+		persistance.setEmail(user.getEmail());
+}
 }
