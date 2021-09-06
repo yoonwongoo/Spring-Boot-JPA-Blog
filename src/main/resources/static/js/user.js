@@ -3,13 +3,17 @@ let index = {
 		$("#btn-save").on("click", () => {           //function(){}, ()=>{} this를 바인딩하기 위해서
 			this.save();
 		});
-		
-		$("#btn-update").on("click", ()=>{
+
+		$("#btn-update").on("click", () => {
 			this.update();
 		});
 		
+		$("#btn-delete").on("click", () => {
+			this.deleteById();
+		});
+
 	},
-	save:function() {
+	save: function() {
 		//alert('user의 함수가 호출됨');
 		let data = {
 			username: $("#username").val(),
@@ -32,11 +36,12 @@ let index = {
 			alert(JSON.stringify(error));
 		});
 	},
-	
-	update:function() {
+
+	update: function() {
 		//alert('user의 함수가 호출됨');
 		let data = {
-			id:$ ("#id").val(),
+			id: $("#id").val(),
+			username: $("#username").val(),
 			password: $("#password").val(),
 			email: $("#email").val()
 		};
@@ -57,6 +62,22 @@ let index = {
 		});
 	},
 
+	deleteById: function() {
+		//alert('user의 함수가 호출됨');
+		let id = $("#id").val();
+
+		$.ajax({
+			type: "DELETE",
+			url: "/user/" + id,
+			contentType: "application/json;charset=utf-8",//바디의 데이터타입이 무엇인지(MIME)
+			dataType: "json"//요청을 서버로해서 응답이 왔을 때, 기본적인 모든것이 문자열.생긴게 json이면 js오브젝트로 변경해준다.
+		}).done(function(resp) {//컨트롤러의 리턴값.
+			alert(" 탈퇴가 완료되었습니다.");
+			location.href = "/logout";
+		}).fail(function(error) {
+			alert(JSON.stringify(error));
+		});
+	},
 
 }
 
