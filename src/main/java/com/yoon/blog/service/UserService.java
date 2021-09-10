@@ -52,12 +52,14 @@ public class UserService {
 		User persistance = userRepository.findById(user.getId()).orElseThrow(() -> {
 			return new IllegalArgumentException("회원찾기 실패");
 		});
-
+		if(persistance.getOauth()==null || persistance.getOauth().equals("")) {
 		String rawPassword = user.getPassword();
 		String encPassword = encoder.encode(rawPassword);
 		persistance.setPassword(encPassword);
-
 		persistance.setEmail(user.getEmail());
+		}
+		
+	
 		
 	
 	}
@@ -68,6 +70,20 @@ public class UserService {
 		userRepository.deleteById(id);
 	}
 	
+	
+	
+	@Transactional(readOnly = true)
+	public User 회원찾기(String username) {
+		
+		User user = userRepository.findByUsername(username).orElseGet(()->{
+			return new User();//빈객체라도 던지니까 널은 아니다.
+		});
+		
+		
+		
+		return user; 
+		
+	}
 	
 	
 	

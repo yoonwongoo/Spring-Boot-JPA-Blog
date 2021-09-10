@@ -29,3 +29,6 @@ spring:
   jackson:
     serialization:
       fail-on-empty-beans: false
+
+yoon:
+  key: yoon1234

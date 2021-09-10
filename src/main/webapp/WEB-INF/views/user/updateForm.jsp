@@ -9,14 +9,27 @@
 		<div class="form-group">
 			<label for="Username">UserName:</label> <input value="${principal.user.username}" type="text" class="form-control" placeholder="Enter Username" id="username" readonly="readonly">
 		</div>
-
+		<c:choose>
+		<c:when test="${not empty principal.user.oauth}">
 		<div class="form-group">
-			<label for="password">Password:</label> <input value="${principal.user.password}" type="password" class="form-control" placeholder="Enter password" id="password">
+			<label for="password">Password:</label> <input value="${principal.user.password}" type="password" class="form-control" placeholder="Enter password" id="password" readonly="readonly" >
 		</div>
-
 		<div class="form-group">
-			<label for="email">Email address:</label> <input value="${principal.user.email}" type="email" class="form-control" placeholder="Enter email" id="email">
+			<label for="email">Email address:</label> <input value="${principal.user.email}" type="email" class="form-control" placeholder="Enter email" id="email" readonly="readonly">
 		</div>
+		</c:when>
+		<c:otherwise>
+		<div class="form-group">
+			<label for="password">Password:</label> <input value="${principal.user.password}" type="password" class="form-control" placeholder="Enter password" id="password"  >
+		</div>
+		<div class="form-group">
+			<label for="email">Email address:</label> <input value="${principal.user.email}" type="email" class="form-control" placeholder="Enter email" id="email" >
+		</div>
+		
+		</c:otherwise>
+		
+		</c:choose>
+		
 
 
 	</form>

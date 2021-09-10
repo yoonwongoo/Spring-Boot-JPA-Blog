@@ -60,6 +60,7 @@ public class UserApiController {
 		userService.회원수정(user);
 		//트랜잭션이 완료는 되었지만, 세션은 변경되지않음. 직접 세션값을 변경을 해준다. 
 		//세션등록 
+		//로그인처리
 		Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
 		SecurityContextHolder.getContext().setAuthentication(authentication);// 홀더에서 context에 입장해서
 		//컨트롤러단에서 해줘야 서비스단에서 트랜잭션이 종료되며 db에 반영이 된다. 바뀐 정보로 세션을 다시 만들어서 유지해준다.
