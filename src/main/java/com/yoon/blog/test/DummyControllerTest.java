@@ -1,4 +1,4 @@
-package com.yoon.blog.Test;
+package com.yoon.blog.test;
 
 import java.util.List;
 import java.util.function.Supplier;

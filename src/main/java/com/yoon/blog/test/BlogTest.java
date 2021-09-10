@@ -1,4 +1,4 @@
-package com.yoon.blog.Test;
+package com.yoon.blog.test;
 
 
 import org.springframework.web.bind.annotation.GetMapping;

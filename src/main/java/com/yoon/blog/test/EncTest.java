@@ -1,4 +1,4 @@
-package com.yoon.blog.Test;
+package com.yoon.blog.test;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

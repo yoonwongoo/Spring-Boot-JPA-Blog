@@ -15,7 +15,7 @@ import com.yoon.blog.dto.ResponseDto;
 import com.yoon.blog.model.Board;
 import com.yoon.blog.service.BoardService;
 
-import lombok.Delegate;
+
 
 @RestController
 public class BoardApiController {

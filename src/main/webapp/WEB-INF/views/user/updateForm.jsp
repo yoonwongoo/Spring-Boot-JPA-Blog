@@ -34,9 +34,10 @@
 
 	</form>
 	<!-- 버튼을 폼태그 안에서 빼주자. -->
-	<button id="btn-update" class="btn btn-primary">회원수정완료</button>
-	<button id="btn-delete" class="btn btn-primary">회원탈퇴</button>
-
+	
+			<div id="btn-update" class="btn btn-primary">회원수정완료</div>
+			<div id="btn-delete" class="btn btn-danger ">회원탈퇴</div>
+	
 </div>
 
 

@@ -3,6 +3,8 @@
 <%@ include file="../layout/header.jsp"%>
 <div class="container">
 
+
+
 	<button class="btn btn-secondary" onclick="history.back()">돌아가기</button>
 	
 	
@@ -34,9 +36,35 @@
 	</div>
 	<hr />
 
-</div>
+	<div class ="card">
+	
+			<div class ="card-body"><textarea class="form-control" rows="1"></textarea></div>
+			<div class ="card-footer"><button class ="btn btn-primary">등록</button></div>
 
-
+	</div>
+	</br>
+	<div class ="card">
+	
+		<div class ="card-header">댓글 리스트</div>
+		
+			<ul class = "list-group" id="reply--box">
+			
+				<c:forEach var="reply" items="${board.replys}">
+				
+					<li class ="list-group-item d-flex justify-content-between" id="reply--1">
+				
+					<div>${reply.content}</div>
+					<div class = "d-flex">
+						<div class="font-italic">작성자:${reply.user.username} &nbsp</div>
+						<button class="badge">삭제</button>
+					</div>
+				</li>
+				
+				</c:forEach>
+			
+			</ul>
+		
+	</div>
 <script src="/js/board.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>

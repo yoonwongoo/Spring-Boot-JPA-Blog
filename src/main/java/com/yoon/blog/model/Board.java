@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -48,7 +50,8 @@ public class Board {
 	
 	//fetch=FetchType.LAZY는 필요할때 떙겨온다.
 	@OneToMany(mappedBy = "board", fetch=FetchType.EAGER)//mappedBy 연관관계의 주인이 아니다. DB의 컬럼을 만들지마세요.
-	private List<Reply> reply;
+	@JsonIgnoreProperties({"board"})// Reply 테이블에서 조인되어있는 board오브젝트를 호출하지않는다. 무한참조방지. 즉. getter호출방지.
+	private List<Reply> replys;
 	
 	private int count;//조회수
 	
