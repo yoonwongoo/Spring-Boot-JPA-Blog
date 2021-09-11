@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
@@ -51,6 +52,7 @@ public class Board {
 	//fetch=FetchType.LAZY는 필요할때 떙겨온다.
 	@OneToMany(mappedBy = "board", fetch=FetchType.EAGER)//mappedBy 연관관계의 주인이 아니다. DB의 컬럼을 만들지마세요.
 	@JsonIgnoreProperties({"board"})// Reply 테이블에서 조인되어있는 board오브젝트를 호출하지않는다. 무한참조방지. 즉. getter호출방지.
+	@OrderBy("id desc")
 	private List<Reply> replys;
 	
 	private int count;//조회수

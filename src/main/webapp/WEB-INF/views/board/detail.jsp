@@ -35,36 +35,41 @@
 		<div>${board.content}</div>
 	</div>
 	<hr />
-
-	<div class ="card">
-	
-			<div class ="card-body"><textarea class="form-control" rows="1"></textarea></div>
-			<div class ="card-footer"><button class ="btn btn-primary">등록</button></div>
-
-	</div>
+	<form>
+		<input type = "hidden" id ="userId" value="${principal.user.id}"/>
+		<input type = "hidden" id="boardId" value="${board.id}"/>
+			<div class ="card">
+				<div class ="card-body"><textarea class="form-control" rows="1" id="reply-content"></textarea></div>
+				<div type="button" class ="card-footer"><button class ="btn btn-primary" id="btn-reply-save">등록</button></div>
+			</div>
+	</form>
+			
 	</br>
 	<div class ="card">
 	
 		<div class ="card-header">댓글 리스트</div>
 		
-			<ul class = "list-group" id="reply--box">
+			<ul class = "list-group" id="reply-box">
 			
 				<c:forEach var="reply" items="${board.replys}">
 				
-					<li class ="list-group-item d-flex justify-content-between" id="reply--1">
+					<li class ="list-group-item d-flex justify-content-between" id="reply-${reply.id}">
 				
 					<div>${reply.content}</div>
 					<div class = "d-flex">
-						<div class="font-italic">작성자:${reply.user.username} &nbsp</div>
-						<button class="badge">삭제</button>
+							<div class="font-italic">작성자:${reply.user.username} &nbsp;</div>
+						<c:if test ="${board.user.id == principal.user.id}">
+							<button onClick="index.replyDelete(${board.id}, ${reply.id})" class="badge">삭제</button>
+						</c:if>
 					</div>
-				</li>
+					</li>
 				
 				</c:forEach>
 			
 			</ul>
 		
 	</div>
+</div>
 <script src="/js/board.js"></script>
 
 <%@ include file="../layout/footer.jsp"%>

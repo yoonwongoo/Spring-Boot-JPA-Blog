@@ -30,7 +30,7 @@ let index = {
 			contentType: "application/json;charset=utf-8",//바디의 데이터타입이 무엇인지(MIME)
 			dataType: "json"//요청을 서버로해서 응답이 왔을 때, 기본적인 모든것이 문자열.생긴게 json이면 js오브젝트로 변경해준다.
 		}).done(function(resp) {//컨트롤러의 리턴값.
-			alert("회원가입이 완료되었습니다.");
+			alert("회원가입이 완료되었습니다.");	
 			location.href = "/";
 		}).fail(function(error) {
 			alert(JSON.stringify(error));

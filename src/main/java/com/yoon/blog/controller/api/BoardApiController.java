@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.yoon.blog.config.auth.PrincipalDetail;
+import com.yoon.blog.dto.ReplySaveRequestDto;
 import com.yoon.blog.dto.ResponseDto;
 import com.yoon.blog.model.Board;
+import com.yoon.blog.model.Reply;
 import com.yoon.blog.service.BoardService;
 
 
@@ -44,5 +46,27 @@ public class BoardApiController {
 
 		boardService.글수정(id, board);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+	
+	
+	//데이터를 받을때는 dto를 만들자 ->가독성.
+	
+	@PostMapping("/api/board/{boardId}/reply")
+	public ResponseDto<Integer> replySave(@RequestBody ReplySaveRequestDto reply){
+		
+		
+		boardService.댓글쓰기(reply);
+		
+		return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
+	}
+	
+	
+	@DeleteMapping("/api/board/{boardId}/reply/{replyId}")
+	public ResponseDto<Integer> replyDelete(@PathVariable int replyId){
+		
+		boardService.댓글삭제(replyId);
+		
+		
+	return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
 	}
 }
